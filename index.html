@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SurgeonValue - The Practice OS for Orthopedic Surgeons</title>
-    <meta name="description" content="Recover lost margins, capture non-operative revenue, and protect your TEAM bundles. Free PROM compliance. Agentic billing. Zero click-debt.">
+    <meta name="description" content="Recover lost margins, capture non-operative revenue, and protect your TEAM bundles. 10 AI agents. Free PROM compliance. Agentic billing. Zero click-debt.">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>S</text></svg>">
     <style>
         :root {
@@ -16,6 +16,7 @@
             --dark-gray: #374151;
             --accent: #10B981;
             --warm: #F59E0B;
+            --red: #DC2626;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -47,20 +48,21 @@
             font-weight: 700;
             color: var(--white);
             letter-spacing: -0.02em;
+            text-decoration: none;
         }
 
         .nav-brand span { color: var(--teal); }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 1.75rem;
             align-items: center;
         }
 
         .nav-links a {
             color: rgba(255,255,255,0.8);
             text-decoration: none;
-            font-size: 0.875rem;
+            font-size: 0.85rem;
             transition: color 0.2s;
         }
 
@@ -96,6 +98,16 @@
 
         .btn-outline:hover {
             border-color: var(--white);
+        }
+
+        .btn-outline-dark {
+            background: transparent;
+            color: var(--navy);
+            border: 1.5px solid rgba(27, 42, 74, 0.3);
+        }
+
+        .btn-outline-dark:hover {
+            border-color: var(--navy);
         }
 
         .btn-large {
@@ -168,12 +180,47 @@
             display: flex;
             gap: 1rem;
             flex-wrap: wrap;
+            margin-bottom: 1.5rem;
         }
+
+        .hero-patient {
+            margin-top: 1rem;
+            padding: 1.25rem 1.5rem;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            display: inline-block;
+            max-width: 480px;
+        }
+
+        .hero-patient-label {
+            color: var(--teal);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-patient p {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero-patient a {
+            color: var(--teal);
+            font-size: 0.85rem;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .hero-patient a:hover { text-decoration: underline; }
 
         .hero-stats {
             display: flex;
             gap: 3rem;
-            margin-top: 4rem;
+            margin-top: 3rem;
             padding-top: 2rem;
             border-top: 1px solid rgba(255,255,255,0.1);
         }
@@ -191,7 +238,7 @@
             letter-spacing: 0.05em;
         }
 
-        /* PROBLEM */
+        /* SECTIONS */
         .section {
             padding: 6rem 2rem;
         }
@@ -224,9 +271,10 @@
             margin-bottom: 3rem;
         }
 
+        /* PROBLEM */
         .problem-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 1.5rem;
         }
 
@@ -238,7 +286,7 @@
         }
 
         .problem-card .number {
-            color: var(--teal);
+            color: var(--red);
             font-size: 2.5rem;
             font-weight: 800;
             line-height: 1;
@@ -266,7 +314,7 @@
 
         .agents-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1rem;
         }
 
@@ -283,31 +331,55 @@
             border-color: var(--teal);
         }
 
+        .agent-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
         .agent-icon {
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             border-radius: 8px;
             background: rgba(13, 115, 119, 0.2);
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--teal);
+            flex-shrink: 0;
         }
 
         .agent-card h3 {
-            font-size: 1rem;
-            margin-bottom: 0.25rem;
+            font-size: 0.95rem;
+            margin-bottom: 0;
         }
 
         .agent-card .tag {
             display: inline-block;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             padding: 0.15rem 0.5rem;
             border-radius: 100px;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+        }
+
+        .tag-free {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10B981;
+        }
+
+        .tag-core {
             background: rgba(13, 115, 119, 0.2);
             color: var(--teal);
-            margin-bottom: 0.5rem;
+        }
+
+        .tag-pro {
+            background: rgba(245, 158, 11, 0.2);
+            color: #F59E0B;
         }
 
         .agent-card p {
@@ -315,7 +387,7 @@
             font-size: 0.85rem;
         }
 
-        /* MATH */
+        /* MATH / REVENUE */
         .math-section {
             background: var(--light);
         }
@@ -326,7 +398,7 @@
             gap: 2rem;
             align-items: center;
             max-width: 800px;
-            margin: 0 auto;
+            margin: 0 auto 3rem;
         }
 
         .math-box {
@@ -377,12 +449,80 @@
 
         .math-footnote {
             text-align: center;
-            margin-top: 2rem;
+            margin-top: 1.5rem;
             color: var(--gray);
             font-size: 0.85rem;
         }
 
-        /* COMPLIANCE */
+        /* Annual Breakdown */
+        .annual-breakdown {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .annual-breakdown h3 {
+            text-align: center;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .annual-breakdown .subtitle {
+            text-align: center;
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+        }
+
+        .breakdown-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .breakdown-card {
+            background: var(--white);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid rgba(0,0,0,0.06);
+        }
+
+        .breakdown-card .breakdown-amount {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--teal);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .breakdown-card .breakdown-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 0.25rem;
+        }
+
+        .breakdown-card .breakdown-desc {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        .breakdown-total {
+            text-align: center;
+            background: var(--navy);
+            color: var(--white);
+            border-radius: 10px;
+            padding: 1.25rem;
+            font-size: 1.1rem;
+        }
+
+        .breakdown-total strong {
+            font-size: 1.5rem;
+            color: var(--teal);
+        }
+
+        /* COMPLIANCE BADGES */
         .compliance-badges {
             display: flex;
             flex-wrap: wrap;
@@ -397,7 +537,7 @@
             border-radius: 8px;
             padding: 1rem 1.5rem;
             text-align: center;
-            min-width: 140px;
+            min-width: 130px;
         }
 
         .badge .code {
@@ -412,6 +552,84 @@
             margin-top: 0.25rem;
         }
 
+        /* COMPLIANCE DEPTH */
+        .compliance-depth {
+            background: var(--white);
+        }
+
+        .instruments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .instrument-card {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .instrument-card .inst-name {
+            font-weight: 800;
+            font-size: 1rem;
+            color: var(--navy);
+            margin-bottom: 0.25rem;
+        }
+
+        .instrument-card .inst-joint {
+            font-size: 0.8rem;
+            color: var(--teal);
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .instrument-card .inst-scb {
+            font-size: 0.75rem;
+            color: var(--gray);
+        }
+
+        .rtm-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .rtm-table th {
+            background: var(--navy);
+            color: var(--white);
+            padding: 0.75rem 1rem;
+            text-align: left;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .rtm-table th:first-child { border-radius: 8px 0 0 0; }
+        .rtm-table th:last-child { border-radius: 0 8px 0 0; }
+
+        .rtm-table td {
+            padding: 0.75rem 1rem;
+            font-size: 0.9rem;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+        }
+
+        .rtm-table tr:nth-child(even) td {
+            background: var(--light);
+        }
+
+        .rtm-table .code-cell {
+            font-weight: 700;
+            color: var(--navy);
+        }
+
+        .rtm-table .amount-cell {
+            font-weight: 700;
+            color: var(--teal);
+        }
+
         /* HOW IT WORKS */
         .steps {
             display: grid;
@@ -423,12 +641,9 @@
         .step {
             counter-increment: step;
             position: relative;
-            padding-left: 0;
         }
 
-        .step::before {
-            content: counter(step);
-            display: block;
+        .step-number {
             width: 48px;
             height: 48px;
             border-radius: 50%;
@@ -452,6 +667,257 @@
             font-size: 0.9rem;
         }
 
+        /* SOCIAL PROOF - @orthominute */
+        .social-section {
+            background: var(--navy);
+            color: var(--white);
+        }
+
+        .social-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .social-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .social-stat {
+            background: rgba(255,255,255,0.06);
+            border-radius: 10px;
+            padding: 1.25rem;
+            text-align: center;
+        }
+
+        .social-stat .stat-value {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--teal);
+        }
+
+        .social-stat .stat-label {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .social-right h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .social-right p {
+            color: rgba(255,255,255,0.6);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* CASE STUDIES */
+        .cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .case-card {
+            background: var(--light);
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .case-card .case-tag {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--teal);
+            margin-bottom: 0.75rem;
+        }
+
+        .case-card .case-metric {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--navy);
+            margin-bottom: 0.5rem;
+        }
+
+        .case-card h3 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .case-card p {
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+
+        /* RUN YOUR NUMBERS */
+        .numbers-section {
+            background: linear-gradient(135deg, var(--navy) 0%, #1a3a5c 100%);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .numbers-section h2 { color: var(--white); }
+        .numbers-section .section-lead {
+            color: rgba(255,255,255,0.6);
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* FELLOWS */
+        .fellows-section {
+            background: var(--light);
+        }
+
+        .fellows-box {
+            background: var(--white);
+            border: 2px solid var(--teal);
+            border-radius: 16px;
+            padding: 3rem;
+            max-width: 800px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .fellows-box h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .fellows-box h3 span {
+            color: var(--teal);
+        }
+
+        .fellows-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .fellows-list li {
+            padding: 0.5rem 0;
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .fellows-list li::before {
+            content: '+';
+            position: absolute;
+            left: 0;
+            color: var(--teal);
+            font-weight: 800;
+        }
+
+        /* LEADERSHIP */
+        .leadership-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .leader-card {
+            background: var(--light);
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .leader-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.15rem;
+        }
+
+        .leader-card .leader-title {
+            color: var(--teal);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .leader-card p {
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+
+        /* FIND A PROVIDER */
+        .provider-section {
+            background: var(--navy);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .provider-section h2 { color: var(--white); }
+        .provider-section .section-lead {
+            color: rgba(255,255,255,0.6);
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .provider-stat {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--teal);
+            margin-bottom: 0.5rem;
+        }
+
+        .provider-stat-label {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        /* RELATED PRODUCTS */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .product-card {
+            background: var(--light);
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.2s;
+        }
+
+        .product-card:hover {
+            border-color: var(--teal);
+            box-shadow: 0 4px 16px rgba(13, 115, 119, 0.08);
+        }
+
+        .product-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-card h3 a {
+            color: var(--navy);
+            text-decoration: none;
+        }
+
+        .product-card h3 a:hover {
+            color: var(--teal);
+        }
+
+        .product-card p {
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+
         /* CTA */
         .cta-section {
             background: var(--navy);
@@ -471,6 +937,22 @@
             color: rgba(255,255,255,0.6);
             font-size: 1.1rem;
             margin-bottom: 2rem;
+            max-width: 540px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-section .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-legal {
+            margin-top: 2rem;
+            color: rgba(255,255,255,0.35);
+            font-size: 0.8rem;
             max-width: 480px;
             margin-left: auto;
             margin-right: auto;
@@ -481,20 +963,114 @@
             background: #111827;
             color: rgba(255,255,255,0.4);
             padding: 3rem 2rem;
-            text-align: center;
             font-size: 0.8rem;
         }
 
-        footer a {
-            color: rgba(255,255,255,0.6);
-            text-decoration: none;
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .footer-links {
-            display: flex;
-            justify-content: center;
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
             gap: 2rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .footer-brand {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-brand span { color: var(--teal); }
+
+        .footer-col h4 {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-col a {
+            display: block;
+            color: rgba(255,255,255,0.4);
+            text-decoration: none;
+            font-size: 0.8rem;
+            padding: 0.2rem 0;
+            transition: color 0.2s;
+        }
+
+        .footer-col a:hover { color: rgba(255,255,255,0.8); }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-bottom p { margin: 0; }
+
+        /* PRICING ROW */
+        .pricing-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            max-width: 900px;
+            margin: 2rem auto 0;
+        }
+
+        .pricing-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            border: 2px solid rgba(0,0,0,0.06);
+        }
+
+        .pricing-card.featured {
+            border-color: var(--teal);
+            box-shadow: 0 4px 24px rgba(13, 115, 119, 0.1);
+        }
+
+        .pricing-card .pricing-tier {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-card .pricing-price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--navy);
+        }
+
+        .pricing-card .pricing-price span {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--gray);
+        }
+
+        .pricing-card .pricing-desc {
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-top: 0.5rem;
+        }
+
+        .pricing-card .pricing-plus {
+            margin-top: 0.75rem;
+            font-size: 0.85rem;
+            color: var(--navy);
+            font-weight: 600;
         }
 
         /* RESPONSIVE */
@@ -504,32 +1080,45 @@
                 grid-template-columns: 1fr;
                 gap: 1rem;
             }
-            .math-arrow { transform: rotate(90deg); }
+            .math-arrow { transform: rotate(90deg); text-align: center; }
             .nav-links { display: none; }
+            .social-content { grid-template-columns: 1fr; gap: 2rem; }
+            .fellows-box { grid-template-columns: 1fr; }
+            .breakdown-grid { grid-template-columns: 1fr; }
+            .footer-top { grid-template-columns: 1fr 1fr; }
+            .pricing-row { grid-template-columns: 1fr; max-width: 360px; }
         }
     </style>
 </head>
 <body>
 
+<!-- ==================== NAV ==================== -->
 <nav>
-    <div class="nav-brand">Surgeon<span>Value</span></div>
+    <a href="#" class="nav-brand">Surgeon<span>Value</span></a>
     <div class="nav-links">
-        <a href="#problem">The Problem</a>
-        <a href="#agents">9 Agents</a>
-        <a href="#math">The Math</a>
+        <a href="#agents">Agents</a>
+        <a href="#compliance">Compliance</a>
+        <a href="#math">Revenue</a>
         <a href="#how">How It Works</a>
-        <a href="#cta" class="btn btn-primary">Register Your NPI</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#cta" class="btn btn-primary">Get Started</a>
     </div>
 </nav>
 
+<!-- ==================== HERO ==================== -->
 <section class="hero">
     <div class="hero-content">
         <div class="hero-eyebrow">The Practice OS for Orthopedic Surgeons</div>
         <h1>Your NPI is a <em>revenue engine.</em> We turn it on.</h1>
-        <p class="hero-sub">Free PROM compliance. Agentic billing for CCM, TCM, RTM, and ACCESS. Nine AI agents that run your non-operative practice while you operate.</p>
+        <p class="hero-sub">Free PROM compliance. Agentic billing for CCM, TCM, RTM, and ACCESS. Ten AI agents that run your non-operative practice while you operate. Zero click-debt.</p>
         <div class="hero-ctas">
-            <a href="#cta" class="btn btn-primary btn-large">Register Your NPI</a>
+            <a href="mailto:levonti@surgeonvalue.com?subject=SurgeonValue%20NPI%20Registration" class="btn btn-primary btn-large">Register Your NPI</a>
             <a href="#math" class="btn btn-outline btn-large">See the Math</a>
+        </div>
+        <div class="hero-patient">
+            <div class="hero-patient-label">For Patients</div>
+            <p>Need a post-surgical assessment or looking for an orthopedic surgeon near you? Start with a free outcomes assessment.</p>
+            <a href="#provider">Find a Provider &rarr;</a>
         </div>
         <div class="hero-stats">
             <div>
@@ -537,8 +1126,8 @@
                 <div class="hero-stat-label">2026 MIPS Efficiency Cut</div>
             </div>
             <div>
-                <div class="hero-stat-value">$320</div>
-                <div class="hero-stat-label">Monthly Non-Op Revenue / Patient</div>
+                <div class="hero-stat-value">$80K+</div>
+                <div class="hero-stat-label">Annual Revenue Recovery</div>
             </div>
             <div>
                 <div class="hero-stat-value">0</div>
@@ -552,6 +1141,7 @@
     </div>
 </section>
 
+<!-- ==================== THE 2026 SQUEEZE ==================== -->
 <section class="section" id="problem">
     <div class="section-inner">
         <div class="section-eyebrow">The 2026 Squeeze</div>
@@ -561,7 +1151,7 @@
             <div class="problem-card">
                 <div class="number">-2.5%</div>
                 <h3>MIPS Efficiency Adjustment</h3>
-                <p>CMS says you're "too fast" and cut your surgical fees. Every case you do earns less than last year.</p>
+                <p>CMS says you're "too fast" and cuts your surgical fees. Every case you do earns less than last year.</p>
             </div>
             <div class="problem-card">
                 <div class="number">96%</div>
@@ -582,70 +1172,119 @@
     </div>
 </section>
 
+<!-- ==================== 10 AI AGENTS ==================== -->
 <section class="section agents-section" id="agents">
     <div class="section-inner">
         <div class="section-eyebrow">Your Agentic Practice</div>
-        <h2>9 agents. 9 pipes to the patient. Zero click-debt.</h2>
+        <h2>10 agents. 10 pipes to the patient. Zero click-debt.</h2>
         <p class="section-lead">Each agent is visible for free. They execute when you upgrade. All billing runs through your own NPI.</p>
         <div class="agents-grid">
             <div class="agent-card">
-                <div class="agent-icon">P</div>
-                <h3>PROM Collector</h3>
-                <span class="tag">FREE</span>
-                <p>Automated KOOS/HOOS JR collection via SMS. ACCESS Model compliance built in. Patients complete in 90 seconds.</p>
+                <div class="agent-header">
+                    <div class="agent-icon">P</div>
+                    <h3>PROM Collector</h3>
+                </div>
+                <span class="tag tag-free">FREE</span>
+                <p>Automated KOOS/HOOS JR, ODI, NDI, QuickDASH collection via SMS. ACCESS Model compliance built in. Patients complete in 90 seconds.</p>
             </div>
             <div class="agent-card">
-                <div class="agent-icon">B</div>
-                <h3>Billing Autopilot</h3>
-                <span class="tag">CORE</span>
+                <div class="agent-header">
+                    <div class="agent-icon">V</div>
+                    <h3>Voice PROM Agent</h3>
+                </div>
+                <span class="tag tag-pro">PRO</span>
+                <p>AI phone collection for patients who don't respond to SMS. Conversational PROM capture in 2 minutes. Validated against written instruments.</p>
+            </div>
+            <div class="agent-card">
+                <div class="agent-header">
+                    <div class="agent-icon">B</div>
+                    <h3>Billing Autopilot</h3>
+                </div>
+                <span class="tag tag-core">CORE</span>
                 <p>Identifies CCM, TCM, RTM, and PIN-eligible patients. Pre-populates documentation. You swipe to bill.</p>
             </div>
             <div class="agent-card">
-                <div class="agent-icon">T</div>
-                <h3>TEAM Guardian</h3>
-                <span class="tag">CORE</span>
+                <div class="agent-header">
+                    <div class="agent-icon">T</div>
+                    <h3>TEAM Guardian</h3>
+                </div>
+                <span class="tag tag-core">CORE</span>
                 <p>Monitors 30-day post-op window. Triggers caregiver support and PIN navigation before readmission risk spikes.</p>
             </div>
             <div class="agent-card">
-                <div class="agent-icon">A</div>
-                <h3>ACCESS Navigator</h3>
-                <span class="tag">PRO</span>
+                <div class="agent-header">
+                    <div class="agent-icon">A</div>
+                    <h3>ACCESS Navigator</h3>
+                </div>
+                <span class="tag tag-pro">PRO</span>
                 <p>Manages your MSK ACCESS Model track. Tracks OAP thresholds. Ensures you hit the 50% attainment gate.</p>
             </div>
             <div class="agent-card">
-                <div class="agent-icon">R</div>
-                <h3>RTM Monitor</h3>
-                <span class="tag">CORE</span>
-                <p>Short-cycle 2-15 day monitoring (98985). Captures the critical post-op window that was previously unbillable.</p>
+                <div class="agent-header">
+                    <div class="agent-icon">R</div>
+                    <h3>RTM Monitor</h3>
+                </div>
+                <span class="tag tag-core">CORE</span>
+                <p>Short-cycle 2-15 day monitoring (98985). Captures the critical post-op window that was previously unbillable. Six RTM codes tracked.</p>
             </div>
             <div class="agent-card">
-                <div class="agent-icon">S</div>
-                <h3>Surgical Strike Map</h3>
-                <span class="tag">PRO</span>
+                <div class="agent-header">
+                    <div class="agent-icon">S</div>
+                    <h3>Surgical Strike Map</h3>
+                </div>
+                <span class="tag tag-pro">PRO</span>
                 <p>Tracks PROM trends longitudinally. Identifies exactly when conservative care fails and surgical conversion is optimal.</p>
             </div>
             <div class="agent-card">
-                <div class="agent-icon">N</div>
-                <h3>Navigator Dispatch</h3>
-                <span class="tag">PRO</span>
-                <p>Connects to Co-op.Care community navigators. Bills G0023 PIN codes. Your patients get boots-on-the-ground support.</p>
+                <div class="agent-header">
+                    <div class="agent-icon">N</div>
+                    <h3>Navigator Dispatch</h3>
+                </div>
+                <span class="tag tag-pro">PRO</span>
+                <p>Connects to co-op.care community navigators. Bills G0023 PIN codes. Your patients get boots-on-the-ground support.</p>
             </div>
             <div class="agent-card">
-                <div class="agent-icon">C</div>
-                <h3>ClinicalSwipe Review</h3>
-                <span class="tag">PRO</span>
+                <div class="agent-header">
+                    <div class="agent-icon">C</div>
+                    <h3>ClinicalSwipe Review</h3>
+                </div>
+                <span class="tag tag-pro">PRO</span>
                 <p>Peer physician validation of AI care pathways. Independent review outside your influence. AKS/Stark clean.</p>
             </div>
             <div class="agent-card">
-                <div class="agent-icon">D</div>
-                <h3>Dashboard Intelligence</h3>
-                <span class="tag">CORE</span>
+                <div class="agent-header">
+                    <div class="agent-icon">D</div>
+                    <h3>Dashboard Intelligence</h3>
+                </div>
+                <span class="tag tag-core">CORE</span>
                 <p>Real-time panel analytics. Lost revenue identification. EMR-connected. Shows you exactly what you're missing today.</p>
+            </div>
+        </div>
+
+        <!-- Pricing Row -->
+        <div class="pricing-row" id="pricing">
+            <div class="pricing-card">
+                <div class="pricing-tier" style="color: #10B981;">Free</div>
+                <div class="pricing-price">$0</div>
+                <div class="pricing-desc">PROM Collector + Dashboard visibility. See what you're missing.</div>
+            </div>
+            <div class="pricing-card featured">
+                <div class="pricing-tier" style="color: var(--teal);">Core - $199/mo</div>
+                <div class="pricing-price">$199 <span>/mo</span></div>
+                <div class="pricing-plus">+ $20/encounter</div>
+                <div class="pricing-desc">Billing Autopilot, TEAM Guardian, RTM Monitor, Dashboard Intelligence.</div>
+            </div>
+            <div class="pricing-card">
+                <div class="pricing-tier" style="color: #F59E0B;">Pro - $299/mo</div>
+                <div class="pricing-price">$299 <span>/mo</span></div>
+                <div class="pricing-plus">+ $20/encounter</div>
+                <div class="pricing-desc">All 10 agents. ACCESS Navigator, Voice PROM, Surgical Strike Map, Navigator Dispatch, ClinicalSwipe.</div>
             </div>
         </div>
     </div>
 </section>
 
+<!-- ==================== REVENUE MATH ==================== -->
 <section class="section math-section" id="math">
     <div class="section-inner">
         <div class="section-eyebrow">The Revenue Recovery</div>
@@ -662,10 +1301,9 @@
             <div class="math-box after">
                 <div class="label">With SurgeonValue</div>
                 <div class="amount">$1,820</div>
-                <div class="detail">Full surgical fee + $320/mo non-operative revenue + zero patient acquisition cost</div>
+                <div class="detail">Full surgical fee + non-operative revenue + zero patient acquisition cost</div>
             </div>
         </div>
-
         <p class="math-footnote">Based on combined CCM ($42/mo), PIN ($80/mo), RTM ($52/mo), TCM, and ACCESS OAP ($12/mo) per managed patient.</p>
 
         <div class="compliance-badges">
@@ -678,9 +1316,118 @@
             <div class="badge"><div class="code">ACCESS</div><div class="desc">MSK Track</div></div>
             <div class="badge"><div class="code">TEAM</div><div class="desc">Bundle Guard</div></div>
         </div>
+
+        <!-- $80K Annual Breakdown -->
+        <div class="annual-breakdown" style="margin-top: 4rem;">
+            <h3>$80K+ Annual Revenue Per Surgeon</h3>
+            <p class="subtitle">Three revenue streams. One platform. Your NPI.</p>
+            <div class="breakdown-grid">
+                <div class="breakdown-card">
+                    <div class="breakdown-amount">$15K</div>
+                    <div class="breakdown-label">Co-Management Revenue</div>
+                    <div class="breakdown-desc">CCM, TCM, and TEAM bundle co-management billing on your existing post-op patients</div>
+                </div>
+                <div class="breakdown-card">
+                    <div class="breakdown-amount">$43K</div>
+                    <div class="breakdown-label">RTM Revenue</div>
+                    <div class="breakdown-desc">Six RTM codes across your surgical and conservative care panel. Automated collection. Automated billing.</div>
+                </div>
+                <div class="breakdown-card">
+                    <div class="breakdown-amount">$22K</div>
+                    <div class="breakdown-label">Pipeline Revenue</div>
+                    <div class="breakdown-desc">PIN navigation, CHI health integration, ACCESS OAP, and surgical conversion from Surgical Strike Map</div>
+                </div>
+            </div>
+            <div class="breakdown-total">
+                Total annual recovery: <strong>$80,000+</strong> per surgeon
+            </div>
+        </div>
     </div>
 </section>
 
+<!-- ==================== COMPLIANCE DEPTH ==================== -->
+<section class="section compliance-depth" id="compliance">
+    <div class="section-inner">
+        <div class="section-eyebrow">Compliance Depth</div>
+        <h2>5 validated instruments. 6 RTM codes. Full OAT/SST tracking.</h2>
+        <p class="section-lead">Every PROM collection meets ACCESS Model validation requirements. Substantive Clinical Benefit (SCB) thresholds built into every instrument.</p>
+
+        <h3 style="font-size: 1.1rem; margin-bottom: 1.5rem;">Validated Instruments</h3>
+        <div class="instruments-grid">
+            <div class="instrument-card">
+                <div class="inst-name">KOOS JR</div>
+                <div class="inst-joint">Knee</div>
+                <div class="inst-scb">20-point SCB threshold</div>
+            </div>
+            <div class="instrument-card">
+                <div class="inst-name">HOOS JR</div>
+                <div class="inst-joint">Hip</div>
+                <div class="inst-scb">22-point SCB threshold</div>
+            </div>
+            <div class="instrument-card">
+                <div class="inst-name">ODI</div>
+                <div class="inst-joint">Lumbar Spine</div>
+                <div class="inst-scb">Oswestry Disability Index</div>
+            </div>
+            <div class="instrument-card">
+                <div class="inst-name">NDI</div>
+                <div class="inst-joint">Cervical Spine</div>
+                <div class="inst-scb">Neck Disability Index</div>
+            </div>
+            <div class="instrument-card">
+                <div class="inst-name">QuickDASH</div>
+                <div class="inst-joint">Shoulder / Arm / Hand</div>
+                <div class="inst-scb">Upper extremity function</div>
+            </div>
+        </div>
+
+        <h3 style="font-size: 1.1rem; margin-bottom: 1rem;">RTM Billing Codes (2026 Medicare Fee Schedule)</h3>
+        <table class="rtm-table">
+            <thead>
+                <tr>
+                    <th>Code</th>
+                    <th>Description</th>
+                    <th>Payment</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="code-cell">98975</td>
+                    <td>RTM initial setup and patient education</td>
+                    <td class="amount-cell">$21.71</td>
+                </tr>
+                <tr>
+                    <td class="code-cell">98985</td>
+                    <td>RTM device supply, short-cycle (2-15 days)</td>
+                    <td class="amount-cell">$40.08</td>
+                </tr>
+                <tr>
+                    <td class="code-cell">98977</td>
+                    <td>RTM device supply, standard cycle (16+ days)</td>
+                    <td class="amount-cell">$40.08</td>
+                </tr>
+                <tr>
+                    <td class="code-cell">98979</td>
+                    <td>RTM management, initial 20 min/month</td>
+                    <td class="amount-cell">$26.39</td>
+                </tr>
+                <tr>
+                    <td class="code-cell">98980</td>
+                    <td>RTM management services, first 20 min</td>
+                    <td class="amount-cell">$54.11</td>
+                </tr>
+                <tr>
+                    <td class="code-cell">98981</td>
+                    <td>RTM management services, each additional 20 min</td>
+                    <td class="amount-cell">$41.42</td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="color: var(--gray); font-size: 0.8rem; margin-top: 0.75rem;">Source: 2026 CMS Physician Fee Schedule. Rates shown are national average Medicare payments.</p>
+    </div>
+</section>
+
+<!-- ==================== HOW IT WORKS ==================== -->
 <section class="section" id="how">
     <div class="section-inner">
         <div class="section-eyebrow">How It Works</div>
@@ -689,40 +1436,244 @@
 
         <div class="steps">
             <div class="step">
+                <div class="step-number">1</div>
                 <h3>Register your NPI</h3>
                 <p>30-second signup. We verify your NPI and connect to your EMR (Epic, Cerner, athena, eCW, ModMed, DrChrono) or import via CSV.</p>
             </div>
             <div class="step">
+                <div class="step-number">2</div>
                 <h3>AI scans your panel</h3>
                 <p>Our agents analyze your patient population. Within minutes, your dashboard shows exactly how much non-operative revenue you're leaving on the table.</p>
             </div>
             <div class="step">
+                <div class="step-number">3</div>
                 <h3>Patients get enrolled</h3>
-                <p>Automated PROM collection via SMS. CCM/TCM eligibility flagged. ACCESS Model patients identified. Zero manual data entry.</p>
+                <p>Automated PROM collection via SMS (or Voice PROM). CCM/TCM eligibility flagged. ACCESS Model patients identified. Zero manual data entry.</p>
             </div>
             <div class="step">
+                <div class="step-number">4</div>
                 <h3>You swipe. We bill.</h3>
-                <p>Pre-populated documentation appears in your queue. Swipe to validate. Billing runs through your own NPI at flat $15-25/encounter. AKS clean.</p>
+                <p>Pre-populated documentation appears in your queue. Swipe to validate. Billing runs through your own NPI at flat $15-25/encounter. AKS/Stark clean.</p>
             </div>
         </div>
     </div>
 </section>
 
-<section class="cta-section" id="cta">
-    <h2>Your NPI is worth more than your surgical fee.</h2>
-    <p>Free PROM compliance. Agentic billing. Zero click-debt. Register your NPI and see what you're missing in under 5 minutes.</p>
-    <a href="mailto:blaine@solvinghealth.com?subject=SurgeonValue%20NPI%20Registration" class="btn btn-primary btn-large">Register Your NPI</a>
+<!-- ==================== @orthominute SOCIAL PROOF ==================== -->
+<section class="section social-section" id="social">
+    <div class="section-inner">
+        <div class="social-content">
+            <div class="social-left">
+                <div class="section-eyebrow">Built by Surgeons, for Surgeons</div>
+                <h2 style="color: var(--white);">@orthominute</h2>
+                <div class="social-stats">
+                    <div class="social-stat">
+                        <div class="stat-value">34K</div>
+                        <div class="stat-label">Surgeon Followers</div>
+                    </div>
+                    <div class="social-stat">
+                        <div class="stat-value">1M+</div>
+                        <div class="stat-label">Views / Month</div>
+                    </div>
+                    <div class="social-stat">
+                        <div class="stat-value">25+</div>
+                        <div class="stat-label">Publications</div>
+                    </div>
+                    <div class="social-stat">
+                        <div class="stat-value">10</div>
+                        <div class="stat-label">AI Agents</div>
+                    </div>
+                </div>
+            </div>
+            <div class="social-right">
+                <h3>The same AI that builds his brand builds yours.</h3>
+                <p>Our CEO is the most-followed orthopedic surgeon on social media. The SurgeonValue platform was built from real clinical workflows -- not a Silicon Valley guess at what surgeons need. Every agent was designed by a surgeon who uses them daily in his own practice.</p>
+            </div>
+        </div>
+    </div>
 </section>
 
-<footer>
-    <div class="footer-links">
-        <a href="https://solvinghealth.com">SolvingHealth</a>
-        <a href="https://clinicalswipe.com">ClinicalSwipe</a>
-        <a href="https://co-op.care">Co-op.Care</a>
-        <a href="https://caregoals.com">CareGoals</a>
+<!-- ==================== FROM THE FIELD ==================== -->
+<section class="section" id="cases">
+    <div class="section-inner">
+        <div class="section-eyebrow">From the Field</div>
+        <h2>Real results from early adopters.</h2>
+        <p class="section-lead">Four stories from the first wave of SurgeonValue practices.</p>
+
+        <div class="cases-grid">
+            <div class="case-card">
+                <div class="case-tag">Revenue Agent</div>
+                <div class="case-metric">$97K</div>
+                <h3>Unbilled RTM codes recovered</h3>
+                <p>Dashboard Intelligence scanned 18 months of patient data and identified $97K in RTM codes that had never been billed. First claims submitted within 72 hours of onboarding.</p>
+            </div>
+            <div class="case-card">
+                <div class="case-tag">PROM Collector</div>
+                <div class="case-metric">87%</div>
+                <h3>Response rate on first PROM text</h3>
+                <p>478 patients received their first PROM collection via SMS. 87% completed the instrument within 24 hours. Average completion time: 94 seconds.</p>
+            </div>
+            <div class="case-card">
+                <div class="case-tag">CareGoals</div>
+                <div class="case-metric">12 min</div>
+                <h3>Kitchen-table advance directive</h3>
+                <p>A patient completed a legally valid advance directive through the CareGoals conversation at their kitchen table. No attorney. No hospital visit. Voice-guided by Sage AI.</p>
+            </div>
+            <div class="case-card">
+                <div class="case-tag">co-op.care</div>
+                <div class="case-metric">Equity</div>
+                <h3>Caregiver earned ownership</h3>
+                <p>First co-op.care community caregiver completed 500 hours and earned equity in the cooperative. W-2 wages + ownership. Turnover target: 15% vs. industry 77%.</p>
+            </div>
+        </div>
     </div>
-    <p>SurgeonValue is a product of Solving Health Inc. Powered by the SolvingHealth Agentic Harness.</p>
-    <p style="margin-top: 0.5rem;">All billing runs through the surgeon's own NPI. Flat per-encounter fee. No percentage. No Medicare billing by SurgeonValue.</p>
+</section>
+
+<!-- ==================== RUN YOUR OWN NUMBERS ==================== -->
+<section class="section numbers-section" id="numbers">
+    <div class="section-inner" style="max-width: 700px;">
+        <div class="section-eyebrow">Run Your Own Numbers</div>
+        <h2>See your personalized revenue projection in 30 seconds.</h2>
+        <p class="section-lead">Upload your patient list or connect your EMR. Our AI scans your panel and shows exactly how much non-operative revenue you are leaving on the table -- before you commit to anything.</p>
+        <a href="mailto:levonti@surgeonvalue.com?subject=Revenue%20Projection%20Request" class="btn btn-primary btn-large">Upload Your Patient List</a>
+        <p style="font-size: 0.8rem; color: rgba(255,255,255,0.4); margin-top: 1.5rem; margin-bottom: 0;">HIPAA-compliant. De-identified upload option available. No obligation.</p>
+    </div>
+</section>
+
+<!-- ==================== FELLOWS LAUNCH ==================== -->
+<section class="section fellows-section" id="fellows">
+    <div class="section-inner">
+        <div class="fellows-box">
+            <div>
+                <div class="section-eyebrow">Orthopedic Fellows</div>
+                <h3>Start Free. <span>Build Your Brand Before Day 1.</span></h3>
+                <p style="color: var(--gray); font-size: 0.95rem;">Your first year in practice defines your referral network. SurgeonValue gives you a surgeon profile, PROM compliance, and a patient pipeline before you sign your first contract.</p>
+                <a href="mailto:levonti@surgeonvalue.com?subject=Fellow%20Free%20Account" class="btn btn-primary" style="margin-top: 1rem;">Apply as a Fellow</a>
+            </div>
+            <div>
+                <ul class="fellows-list">
+                    <li>Free SurgeonValue profile with your NPI</li>
+                    <li>PROM Collector active from fellowship</li>
+                    <li>Build outcomes data before your first case</li>
+                    <li>Patient-facing profile in Find a Provider</li>
+                    <li>Upgrade to Core/Pro when you start practice</li>
+                    <li>Network with 34K+ surgeons via @orthominute</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== LEADERSHIP ==================== -->
+<section class="section" id="team">
+    <div class="section-inner">
+        <div class="section-eyebrow">Leadership</div>
+        <h2>Built by surgeons who understand the business of surgery.</h2>
+        <p class="section-lead">Clinical credibility. Operational depth. Technology at scale.</p>
+
+        <div class="leadership-grid">
+            <div class="leader-card">
+                <h3>Levonti Ohanisian, MD MBA</h3>
+                <div class="leader-title">CEO</div>
+                <p>Stanford-trained orthopedic surgeon. 25+ peer-reviewed publications. Creator of @orthominute (34K followers, 1M+ views/month). The rare surgeon who builds the technology he uses in his own practice.</p>
+            </div>
+            <div class="leader-card">
+                <h3>Bryan Lord</h3>
+                <div class="leader-title">COO</div>
+                <p>10+ years in orthopedic fundraising and operations. Built the operational infrastructure that lets surgeons focus on patients while SurgeonValue handles the business layer.</p>
+            </div>
+            <div class="leader-card">
+                <h3>Blaine Warkentine, MD MBA</h3>
+                <div class="leader-title">Co-Founder &amp; Board</div>
+                <p>20+ years in orthopedic technology and health system partnerships. Grew BrainLAB orthopedic vertical to $250M. Multiple healthcare M&amp;A exits including HCA Healthcare and Anytime Fitness. Architect of the SolvingHealth agentic harness.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== FIND A PROVIDER ==================== -->
+<section class="section provider-section" id="provider">
+    <div class="section-inner" style="max-width: 700px;">
+        <div class="section-eyebrow">Find a Provider</div>
+        <h2>Find an orthopedic surgeon near you.</h2>
+        <div class="provider-stat">20,000+</div>
+        <div class="provider-stat-label">Surgeon profiles built from CMS NPI data</div>
+        <p class="section-lead" style="margin-bottom: 2rem;">Search by location, specialty, or procedure. Every profile includes outcomes data, PROM scores, and direct contact. Free for patients.</p>
+        <a href="mailto:levonti@surgeonvalue.com?subject=Find%20a%20Provider%20Inquiry" class="btn btn-primary btn-large">Search Providers</a>
+    </div>
+</section>
+
+<!-- ==================== RELATED PRODUCTS ==================== -->
+<section class="section" id="products">
+    <div class="section-inner">
+        <div class="section-eyebrow">Part of the SolvingHealth Cloud</div>
+        <h2>Related products in the ecosystem.</h2>
+        <p class="section-lead">SurgeonValue is one layer in a complete healthcare operating system.</p>
+
+        <div class="products-grid">
+            <div class="product-card">
+                <h3><a href="https://clinicalswipe.com">ClinicalSwipe</a></h3>
+                <p>Peer physician review marketplace. Independent validation of AI care pathways. Physicians earn $12-$400/review. 30% platform fee. AKS/Stark clean by design.</p>
+            </div>
+            <div class="product-card">
+                <h3><a href="https://co-op.care">co-op.care</a></h3>
+                <p>Worker-owned companion care cooperative. CareOS platform. Autonomous LMN generation for HSA/FSA eligibility. Community navigators bill PIN codes through SurgeonValue.</p>
+            </div>
+            <div class="product-card">
+                <h3><a href="https://caregoals.com">CareGoals</a></h3>
+                <p>AI-guided advance care planning. Voice-first conversation with Sage AI. Legally valid advance directives from the kitchen table. Education hub for practices on ACP billing.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== FINAL CTA ==================== -->
+<section class="cta-section" id="cta">
+    <h2>Your NPI is worth more than your surgical fee.</h2>
+    <p>Free PROM compliance. Agentic billing. Zero click-debt. Flat per-encounter fee. No percentage of collections. No Medicare billing by SurgeonValue. AKS/Stark clean.</p>
+    <div class="cta-buttons">
+        <a href="mailto:levonti@surgeonvalue.com?subject=SurgeonValue%20NPI%20Registration" class="btn btn-primary btn-large">Register Your NPI</a>
+        <a href="mailto:levonti@surgeonvalue.com?subject=SurgeonValue%20Demo%20Request" class="btn btn-outline btn-large">Request a Demo</a>
+    </div>
+    <p class="cta-legal">All billing runs through the surgeon's own NPI. Flat $15-25 per encounter. No percentage. No Medicare billing by SurgeonValue. Fully AKS/Stark compliant.</p>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-top">
+            <div>
+                <div class="footer-brand">Surgeon<span>Value</span></div>
+                <p style="margin-top: 0.5rem;">The Practice OS for Orthopedic Surgeons. 10 AI agents. Zero click-debt. Your NPI, your revenue.</p>
+                <p style="margin-top: 1rem;">Part of the SolvingHealth Cloud.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Platform</h4>
+                <a href="#agents">10 Agents</a>
+                <a href="#compliance">Compliance</a>
+                <a href="#math">Revenue Math</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#fellows">Fellows Program</a>
+            </div>
+            <div class="footer-col">
+                <h4>Ecosystem</h4>
+                <a href="https://solvinghealth.com">SolvingHealth</a>
+                <a href="https://clinicalswipe.com">ClinicalSwipe</a>
+                <a href="https://co-op.care">co-op.care</a>
+                <a href="https://caregoals.com">CareGoals</a>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <a href="mailto:levonti@surgeonvalue.com">levonti@surgeonvalue.com</a>
+                <a href="#provider">Find a Provider</a>
+                <a href="#numbers">Revenue Projection</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>SurgeonValue is a product of Solving Health Inc. Powered by the SolvingHealth Agentic Harness.</p>
+            <p>All billing runs through the surgeon's own NPI. Flat per-encounter fee. No percentage. No Medicare billing by SurgeonValue.</p>
+        </div>
+    </div>
 </footer>
 
 </body>
