@@ -336,19 +336,40 @@ body { padding-bottom: 62px; }
     stopRec();
   }
   window.spClose = spClose;
+  const chatHistory = [];
 
-  /* ── SEND ──────────────────────────────────────────────────── */
-  function spSend() {
+  async function spSend() {{
     const inp = document.getElementById('sage-text');
     const txt = inp.value.trim();
     if (!txt) return;
     inp.value = '';
     addBubble(txt, 'user');
     addTyping();
-    setTimeout(() => {
+    chatHistory.push({{ role: 'user', content: txt }});
+
+    try {{
+      const resp = await fetch('/api/sage', {{
+        method: 'POST',
+        headers: {{ 'Content-Type': 'application/json' }},
+        body: JSON.stringify({{
+          message: txt,
+          site: 'surgeonvalue',
+          history: chatHistory.slice(-8)
+        }})
+      }});
+      if (!resp.ok) throw new Error('HTTP ' + resp.status);
+      const data = await resp.json();
       removeTyping();
-      addBubble(getReply(txt), 'sage');
-    }, 900 + Math.random() * 700);
+      const reply = data.response || getReply(txt);
+      addBubble(reply, 'sage');
+      chatHistory.push({{ role: 'assistant', content: reply }});
+    }} catch(e) {{
+      removeTyping();
+      const fallback = getReply(txt);
+      addBubble(fallback, 'sage');
+      chatHistory.push({{ role: 'assistant', content: fallback }});
+    }}
+  }}, 900 + Math.random() * 700);
   }
   window.spSend = spSend;
 
