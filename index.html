@@ -976,8 +976,47 @@ footer { background: var(--navy); padding: 40px 32px; }
 </style>
 <!-- SolvingHealth network footer: attestation ribbon + Reed + signup modal -->
 <script src="https://harnesshealth.ai/footer.js" defer></script>
+<!-- Phase 2 SSO: shared auth across the SolvingHealth network (Apr 25, 2026) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+<style>
+  .sv-auth-strip {
+    max-width: 1100px; margin: 1rem auto 0; padding: 0.7rem 1.25rem;
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    gap: 0.85rem; background: #fff; border: 1px solid var(--border, #d8c9a8);
+    border-radius: 999px; font-family: 'Inter', system-ui, sans-serif; font-size: 14px;
+  }
+  .sv-auth-strip .sv-auth-copy { color: var(--ink-dim, #52443a); }
+  .sv-auth-strip .sv-auth-copy strong { color: var(--ink, #2a1f15); }
+  .sv-auth-strip .sv-gpill {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 14px; background: var(--navy, #1e2c4f); color: #fff;
+    border: none; border-radius: 999px; font-size: 13px; font-weight: 600;
+    cursor: pointer; transition: all 0.15s; font-family: inherit;
+  }
+  .sv-auth-strip .sv-gpill:hover { background: #1a2545; transform: translateY(-1px); }
+  .sv-auth-strip .sv-signed-in { display: flex; align-items: center; gap: 10px; color: var(--ink, #2a1f15); }
+  .sv-auth-strip .sv-signed-in img { width: 28px; height: 28px; border-radius: 50%; }
+  .sv-auth-strip .sv-signed-in .sv-signout {
+    font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--ink-soft, #8b7a6e);
+    text-decoration: underline; cursor: pointer; letter-spacing: 0.04em; margin-left: 6px;
+  }
+</style>
 </head>
 <body>
+
+<!-- ── SHARED-NETWORK AUTH STRIP (Phase 2 SSO) ── -->
+<div class="sv-auth-strip" id="sv-auth-strip">
+  <span class="sv-auth-copy" id="sv-auth-copy"><strong>Already a SurgeonValue member?</strong> One sign-in works across the whole SolvingHealth network.</span>
+  <button type="button" class="sv-gpill" id="sv-auth-btn" onclick="svSignIn()">
+    <svg width="14" height="14" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#fff" opacity="0.95" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z"/><path fill="#fff" opacity="0.85" d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z"/><path fill="#fff" opacity="0.75" d="M3.964 10.71A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332z"/><path fill="#fff" opacity="0.65" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z"/></svg>
+    Continue with Google
+  </button>
+  <div class="sv-signed-in" id="sv-signed-in" style="display:none;">
+    <img id="sv-avatar" src="" alt="">
+    <span>Signed in as <strong id="sv-name">friend</strong></span>
+    <a class="sv-signout" onclick="svSignOut(); return false;">sign out</a>
+  </div>
+</div>
 
 <!-- ── URGENCY BANNER ── -->
 <div class="urgency-banner">
@@ -1897,6 +1936,7 @@ function showScreen(name) {
     .then(function(html) {
       // Inject normalizer before </head>
       html = html.replace('</head>', SV_NORMALIZER + '</head>');
+// (auth handlers appended at the end of the file inside their own <script>)
       _screenCache[name] = html;
       frame.srcdoc = html;
     });
@@ -2815,4 +2855,70 @@ async function svCheckout(plan) {
 })();
 </script>
 
+<!-- ═══════════════ Phase 2 SSO HANDLER (Apr 25, 2026) ═══════════════ -->
+<script>
+(function() {
+  const _SV_SU = 'https://uhizqukdctkvluluheux.supabase.co';
+  const _SV_SK = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVoaXpxdWtkY3Rrdi1sdWx1aGV1eCIsInJvbGUiOiJhbm9uIiwiaWF0IjoxNzQzNDYzNTQ1LCJleHAiOjIwNTkwMzk1NDV9.8fJBnRBcfGZR3YhFijJnm2S6SXLv7VrHhqOkTeBiI5w';
+  let _svSupa = null;
+  function _svGetSupa() {
+    if (_svSupa) return _svSupa;
+    if (!window.supabase || typeof window.supabase.createClient !== 'function') return null;
+    _svSupa = window.supabase.createClient(_SV_SU, _SV_SK);
+    return _svSupa;
+  }
+
+  window.svSignIn = async function() {
+    const supa = _svGetSupa();
+    if (!supa) { alert('Sign-in service still loading — try again in a moment.'); return; }
+    try {
+      const { error } = await supa.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: window.location.href } });
+      if (error) throw error;
+    } catch (e) {
+      console.error('SV sign-in error:', e);
+    }
+  };
+
+  window.svSignOut = async function() {
+    const supa = _svGetSupa();
+    if (!supa) return;
+    await supa.auth.signOut();
+    location.reload();
+  };
+
+  function _svRenderSignedIn(user) {
+    const meta = user.user_metadata || {};
+    const name = meta.full_name || meta.name || '';
+    const firstName = (name.split(' ')[0]) || 'friend';
+    const avatar = meta.avatar_url || meta.picture || '';
+    document.getElementById('sv-auth-copy').style.display = 'none';
+    document.getElementById('sv-auth-btn').style.display = 'none';
+    document.getElementById('sv-signed-in').style.display = 'flex';
+    document.getElementById('sv-name').textContent = firstName;
+    if (avatar) document.getElementById('sv-avatar').src = avatar;
+  }
+
+  function _svWireListeners(attempts) {
+    attempts = attempts || 0;
+    const supa = _svGetSupa();
+    if (!supa) {
+      if (attempts < 25) return setTimeout(() => _svWireListeners(attempts + 1), 100);
+      return;
+    }
+    supa.auth.onAuthStateChange((event, session) => {
+      if (session && session.user) {
+        _svRenderSignedIn(session.user);
+        if (location.hash && location.hash.includes('access_token')) {
+          window.history.replaceState({}, document.title, window.location.pathname + window.location.search);
+        }
+      }
+    });
+    supa.auth.getSession().then(({ data: { session } }) => {
+      if (session && session.user) _svRenderSignedIn(session.user);
+    }).catch(() => {});
+  }
+
+  document.addEventListener('DOMContentLoaded', () => _svWireListeners());
+})();
+</script>
 </body></html>
