@@ -1027,17 +1027,11 @@ footer { background: var(--navy); padding: 40px 32px; }
   </div>
 </div>
 
-<!-- ── AUTH BAR ── -->
-<div class="auth-bar">
-  <div class="auth-bar-inner">
-    <div class="auth-bar-brand">HarnessHealth Network: <span>SurgeonValue</span> · <a href="https://co-op.care" style="color:rgba(255,255,255,0.4);text-decoration:none">co-op.care</a> · <a href="https://clinicalswipe.com" style="color:rgba(255,255,255,0.4);text-decoration:none">ClinicalSwipe</a> · <a href="https://comfortcard.org" style="color:rgba(255,255,255,0.4);text-decoration:none">ComfortCard</a></div>
-    <div class="auth-bar-links">
-      <a href="#profiles">Find a Surgeon</a>
-      <a href="https://solvinghealth.com">SolvingHealth</a>
-      <button class="auth-signin-btn" onclick="openOnboarding('signin')">Sign In</button>
-    </div>
-  </div>
-</div>
+<!-- AUTH BAR removed for clutter cleanup — Sign In moved into main nav, network strip moved to footer -->
+<style>
+  /* Hide global Sage FAB on pages with their own #sage-bar surface */
+  #sage-bar ~ .sw-fab, body:has(#sage-bar) .sw-fab { display:none !important; }
+</style>
 
 <!-- ── NAV ── -->
 <nav class="nav">
@@ -1052,6 +1046,7 @@ footer { background: var(--navy); padding: 40px 32px; }
       <li><a href="#cjrx">CJR-X</a></li>
       <li><a href="#pricing">Pricing</a></li>
       <li><a href="/legal">Legal</a></li>
+      <li><a href="#" onclick="openOnboarding('signin');return false;" style="color:var(--text-muted)">Sign In</a></li>
       <li id="nav-dashboard-link" style="display:none"><a href="/dashboard" id="nav-dash-a" style="color:var(--teal);font-weight:600">My Dashboard</a></li>
       <li><a href="#onboarding" class="nav-cta" id="nav-cta-get-started">Get Started</a></li>
     </ul>
@@ -1092,8 +1087,6 @@ footer { background: var(--navy); padding: 40px 32px; }
         </a>
       </div>
       <div class="trust-row">
-        <div class="trust-item"><span class="ms">phone_iphone</span>30-sec install, no login</div>
-        <div class="trust-item"><span class="ms">block</span>No EMR integration required</div>
         <a href="/legal" class="trust-item trust-item-moat" title="Flat monthly pricing, no revenue share"><span class="ms">sell</span>Flat fees. No revenue share.</a>
         <div class="trust-item"><span class="ms">shield</span>HIPAA compliant</div>
       </div>
@@ -1117,16 +1110,6 @@ footer { background: var(--navy); padding: 40px 32px; }
             <div class="rb-val">$49</div>
             <div class="rb-label">per month, flat</div>
           </div>
-        </div>
-      </div>
-      <div class="mini-cards">
-        <div class="mini-card">
-          <div class="mini-num" style="color:var(--teal)">4</div>
-          <div class="mini-label">agents that work from dictation alone</div>
-        </div>
-        <div class="mini-card">
-          <div class="mini-num">58<span style="font-size:14px;font-weight:600">sec</span></div>
-          <div class="mini-label">Prior auth letter from voice memo</div>
         </div>
       </div>
       <div class="wonder-bill-preview">
